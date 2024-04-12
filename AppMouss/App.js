@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 function StackNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Home" style={styles.stack}>
+    <Stack.Navigator initialRouteName="Home" screenOptions={{headerStyle: { backgroundColor: 'gray' } }}>
       <Stack.Screen name="Acceuil" component={Home} />
       <Stack.Screen name="Rechercher" component={Search}/> 
     </Stack.Navigator>
@@ -22,7 +22,7 @@ function StackNavigator() {
 function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator style={styles.tab}>
+      <Tab.Navigator  tabBarOptions={{style: { backgroundColor: 'gray' } }}>
         <Tab.Screen name="Accueil" component={StackNavigator} />
         <Tab.Screen name="Rechercher" component={Search}/>
       </Tab.Navigator>
@@ -32,6 +32,10 @@ function App() {
 
 const styles = StyleSheet.create({
   tab: {
+    flex: 1,
+    backgroundColor: 'grey',   
+  },
+  stack: {
     flex: 1,
     backgroundColor: 'grey',   
   },
