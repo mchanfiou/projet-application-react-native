@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
-export default function App() {
+import Home from './CustomPages/home';
+import Search from './CustomPages/search';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function StackNavigator() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Acceuil" component={Home} />
+      <Stack.Screen name="Rechercher" component={Search} /> 
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Accueil" component={StackNavigator} />
+        <Tab.Screen name="Rechercher" component={Search} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
