@@ -2,12 +2,13 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground ,StyleSheet, Text, View, Button } from 'react-native';
 
-const image = {uri:'./Images/background.jpg'};
+
+
 function Home({ navigation }) {
   return (
     <View style={styles.container}>
-        <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-            <Text>Bienvenue!</Text>
+        <ImageBackground source={require('../assets/background.jpg')} resizeMode="cover" style={styles.image}>
+            <Text style={styles.text}>Bienvenue!</Text>
             <StatusBar style="auto" />
             <Button title="Rechercher" onPress={() => navigation.navigate('Rechercher')}/>
         </ImageBackground>
@@ -18,13 +19,18 @@ function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,  
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,   
   },
   image: {
     flex: 1,
     justifyContent: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
