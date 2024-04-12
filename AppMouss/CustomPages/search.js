@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Image, ScrollView, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, ImageBackground, View, TextInput, Text, Image, ScrollView, StyleSheet } from 'react-native';
 
 function Search () {
   const [query, setQuery] = useState('');
@@ -24,22 +24,30 @@ function Search () {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Rechercher les meilleurs paysages !"
-        value={query}
-        onChangeText={handleChange}
-      />
-      <Button title="Search" onPress={handleSubmit} />
-      <ScrollView style={styles.results}>
-        {results.map((result) => (
-          <Image
-            key={result.id}
-            source={{ uri: result.previewURL }}
-            style={styles.image}
+      <ImageBackground source={require('../assets/bg.jpg')} resizeMode="cover" style={styles.imageBG}>
+          <TextInput
+            style={styles.input}
+            placeholder="Alors la recherche ? ..."
+            placeholderTextColor="black"
+            value={query}
+            onChangeText={handleChange}
           />
-        ))}
-      </ScrollView>
+          <TouchableOpacity style={[styles.button, { borderColor: "gray" }]} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Rechercher</Text>
+          </TouchableOpacity>
+          
+          <ScrollView style={styles.results}>
+            {results.map((result) => (
+              <Image
+                key={result.id}
+                source={{ uri: result.previewURL }}
+                style={styles.image}
+              />
+            ))}
+          </ScrollView>
+          
+        </ImageBackground>
+        
     </View>
   );
 };
@@ -47,25 +55,51 @@ function Search () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
   },
   input: {
-    width: '80%',
-    borderWidth: 1,
-    borderColor: 'gray',
+    width: '75%',
+    borderWidth: 2,
+    borderColor: 'black',
+    backgroundColor: 'rgba(169, 169, 169, 0.8)',
     borderRadius: 5,
+    margin: 50,
     padding: 10,
     marginBottom: 10,
+    justifyContent: 'center',
+    alignContent : 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   results: {
     marginTop: 20,
+    
   },
   image: {
-    width: 300,
+    width: '90%' ,
+    margin: 20,
     height: 300,
-    margin: 5,
+    marginBottom: 25,
+    alignContent: 'center',
+  },
+  imageBG: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  button: {
+    borderWidth: 2,
+    borderRadius: 5,
+    width: '50%',
+    marginLeft: '25%',
+    padding: 10,
+    alignItems: 'center',
+    borderColor: 'gray', 
+    backgroundColor: 'gray',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white', 
   },
 });
 
